@@ -171,35 +171,6 @@
   #oneMore.show { display:inline-block; }
 
   /* ---- Screen 6 : finale ---- */
-  #s6 { overflow-y:auto; justify-content:flex-start; padding-top:44px; }
-  .scene-wrap { position:relative; width:100%; border-radius:22px; overflow:hidden; border:2px solid rgba(255,93,162,.55); box-shadow:0 16px 40px rgba(255,46,136,.35); background:#fff7ec; }
-  .scene-wrap svg { display:block; width:100%; height:auto; }
-  #brideG { transition:transform 2.8s ease-in-out; }
-  #groomG { transition:transform 1.2s ease-in-out; }
-  .scene-wrap.playing #brideG { transform:translateX(125px); }
-  .scene-wrap.playing #brideG .bob { animation:bob .45s ease-in-out infinite; }
-  @keyframes bob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-5px); } }
-  .scene-wrap.met #groomG { transform:translateX(-35px); }
-  .scene-wrap.met #brideG .bob { animation:none; }
-  .scene-wrap .arm-reach, .scene-wrap .arm-hug { opacity:0; transition:opacity .5s ease; }
-  .scene-wrap .arm-down { transition:opacity .5s ease; }
-  .scene-wrap.playing .arm-reach { opacity:1; }
-  .scene-wrap.playing .arm-down { opacity:0; }
-  .scene-wrap.met .arm-reach { opacity:0; }
-  .scene-wrap.met .arm-hug { opacity:1; }
-  #pair { transform-box:fill-box; transform-origin:50% 100%; }
-  .scene-wrap.held #pair { animation:sway 3s ease-in-out infinite; }
-  @keyframes sway { 0%,100% { transform:rotate(-1.3deg); } 50% { transform:rotate(1.3deg); } }
-  .scene-text { position:absolute; left:0; right:0; top:32%; text-align:center; padding:0 18px; font-size:19px; font-weight:700; letter-spacing:1px; line-height:1.4; color:#fff; text-transform:uppercase; text-shadow:0 2px 14px rgba(0,0,0,.55); opacity:0; transition:opacity .8s ease; pointer-events:none; }
-  .scene-wrap.met .scene-text { opacity:1; }
-  .scene-hearts span { position:absolute; bottom:20%; font-size:20px; opacity:0; pointer-events:none; }
-  .scene-wrap.met .scene-hearts span { animation:riseHeart 2.6s ease-out infinite; }
-  .scene-hearts span:nth-child(1) { left:38%; animation-delay:0s; }
-  .scene-hearts span:nth-child(2) { left:52%; animation-delay:.7s; font-size:15px; }
-  .scene-hearts span:nth-child(3) { left:63%; animation-delay:1.2s; font-size:24px; }
-  @keyframes riseHeart { 0% { transform:translateY(0) scale(.6); opacity:0; } 20% { opacity:.95; } 100% { transform:translateY(-110px) scale(1.15); opacity:0; } }
-  #finaleText { opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease; }
-  #finaleText.show { opacity:1; transform:none; }
   .confetti { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:1; }
   .confetti i { position:absolute; top:-12px; width:9px; height:15px; border-radius:2px; animation:fall linear infinite; }
   @keyframes fall { to { transform:translateY(110vh) rotate(720deg); } }
@@ -268,75 +239,17 @@
   <section class="screen" id="s5">
     <h2 class="script">For M, with love 💖</h2>
     <div class="note-paper"><span id="noteText"></span><span class="cursor"></span></div>
-    <button class="btn" id="oneMore" onclick="go(6); playFinale();">One more thing →</button>
+    <button class="btn" id="oneMore" onclick="go(6); startConfetti();">One more thing →</button>
   </section>
 
   <!-- 6 — FINALE -->
   <section class="screen" id="s6">
     <div class="confetti" id="confetti"></div>
-    <div class="scene-wrap" id="sceneWrap">
-      <svg viewBox="0 0 400 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated scene: a bride in red walks to her groom in a black suit and they hug">
-        <defs>
-          <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#fff8ee"/>
-            <stop offset="1" stop-color="#ffe9d4"/>
-          </linearGradient>
-          <linearGradient id="doorG" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#8b5a2b"/>
-            <stop offset="1" stop-color="#6b4220"/>
-          </linearGradient>
-        </defs>
-        <rect x="0" y="0" width="400" height="330" fill="url(#wallG)"/>
-        <ellipse cx="200" cy="26" rx="130" ry="42" fill="#fff3c4" opacity=".55"/>
-        <rect x="292" y="58" width="82" height="196" rx="6" fill="url(#doorG)"/>
-        <rect x="302" y="72" width="62" height="76" rx="4" fill="none" stroke="#5d3a1a" stroke-width="2" opacity=".6"/>
-        <rect x="302" y="160" width="62" height="76" rx="4" fill="none" stroke="#5d3a1a" stroke-width="2" opacity=".6"/>
-        <circle cx="302" cy="158" r="4.5" fill="#f5c542"/>
-        <rect x="18" y="66" width="56" height="188" rx="6" fill="#f6f0e6" stroke="#e2d6c2" stroke-width="2"/>
-        <line x1="26" y1="110" x2="66" y2="110" stroke="#e2d6c2" stroke-width="2"/>
-        <line x1="26" y1="156" x2="66" y2="156" stroke="#e2d6c2" stroke-width="2"/>
-        <line x1="26" y1="202" x2="66" y2="202" stroke="#e2d6c2" stroke-width="2"/>
-        <rect x="0" y="252" width="400" height="78" fill="#e9dac9"/>
-        <ellipse cx="200" cy="266" rx="132" ry="13" fill="#f3d3de" opacity=".85"/>
-        <g id="pair">
-          <g id="brideG">
-            <g class="bob">
-              <path d="M90,150 L62,268 L118,268 L104,150 Z" fill="#c8102e"/>
-              <path d="M66,256 L114,256" stroke="#f5c542" stroke-width="4" stroke-linecap="round"/>
-              <path d="M90,100 C70,100 62,118 64,142 L76,142 C74,124 80,112 90,112 C100,112 106,124 104,142 L116,142 C118,118 110,100 90,100 Z" fill="#a80e28"/>
-              <circle cx="90" cy="128" r="13" fill="#f2c9a0"/>
-              <path d="M77,116 q-5,32 1,52 l9,-2 q-7,-24 -4,-48 Z" fill="#d21f3c"/>
-              <path d="M103,116 q5,32 -1,52 l-9,-2 q7,-24 4,-48 Z" fill="#d21f3c"/>
-              <path class="arm-down" d="M102,160 q12,16 8,32" stroke="#c8102e" stroke-width="7" stroke-linecap="round" fill="none"/>
-              <path class="arm-reach" d="M102,158 q20,-8 30,-20" stroke="#c8102e" stroke-width="7" stroke-linecap="round" fill="none"/>
-              <path class="arm-hug" d="M102,162 q22,6 32,20" stroke="#c8102e" stroke-width="7" stroke-linecap="round" fill="none"/>
-            </g>
-          </g>
-          <g id="groomG">
-            <rect x="282" y="222" width="13" height="48" rx="5" fill="#17171c"/>
-            <rect x="298" y="222" width="13" height="48" rx="5" fill="#17171c"/>
-            <rect x="278" y="150" width="38" height="76" rx="11" fill="#17171c"/>
-            <path d="M289,152 L305,152 L297,180 Z" fill="#ffffff"/>
-            <path d="M292,150 l5,4 -5,4 -5,-4 Z" fill="#c8102e"/>
-            <circle cx="297" cy="132" r="15" fill="#e8b98d"/>
-            <path d="M282,130 a15,15 0 0 1 30,0 l-2,-8 a13,13 0 0 0 -26,0 Z" fill="#141414"/>
-            <path class="arm-down" d="M280,160 q-12,18 -6,34" stroke="#17171c" stroke-width="7" stroke-linecap="round" fill="none"/>
-            <path class="arm-reach" d="M280,158 q-20,-6 -30,-18" stroke="#17171c" stroke-width="7" stroke-linecap="round" fill="none"/>
-            <path class="arm-hug" d="M280,162 q-22,8 -32,22" stroke="#17171c" stroke-width="7" stroke-linecap="round" fill="none"/>
-          </g>
-        </g>
-        <rect x="0" y="272" width="400" height="58" fill="#fffdf8"/>
-        <path d="M0,272 q200,18 400,0 L400,330 L0,330 Z" fill="#fdf3ee"/>
-      </svg>
-      <div class="scene-text">That first hug was different after engagement</div>
-      <div class="scene-hearts"><span>💖</span><span>💗</span><span>💖</span></div>
-    </div>
-    <div id="finaleText">
+    <div class="avatar" style="width:96px;height:96px;font-size:52px;">🐥</div>
     <div class="rings">💍</div>
     <h1 class="script">Congratulations<br>on Your Engagement!</h1>
     <p>Congratulations, M! 🎉<br>May this beautiful beginning bring you<br>a lifetime of love, laughter &amp; togetherness.<br><b>Z is so happy for you.</b></p>
     <div class="from script" style="font-size:30px;">— With love, Z 💖</div>
-    </div>
     <button class="replay" onclick="go(0)">↺ Watch it again</button>
   </section>
 </div>
@@ -427,23 +340,6 @@
         document.getElementById('oneMore').classList.add('show');
       }
     }, 28);
-  }
-
-  // finale: animated scene like the video — the bride in red walks in from a
-  // distance, they meet and hug, and the hug is held with a gentle sway
-  function playFinale() {
-    var scene = document.getElementById('sceneWrap');
-    var text = document.getElementById('finaleText');
-    scene.classList.remove('playing', 'met', 'held');
-    text.classList.remove('show');
-    void scene.offsetWidth;
-    scene.classList.add('playing');
-    setTimeout(function(){ scene.classList.add('met'); }, 2900);
-    setTimeout(function(){ scene.classList.add('held'); }, 4200);
-    setTimeout(function(){
-      text.classList.add('show');
-      startConfetti();
-    }, 5600);
   }
 
   // confetti on the finale
